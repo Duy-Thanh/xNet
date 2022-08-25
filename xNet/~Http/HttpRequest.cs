@@ -2448,8 +2448,7 @@ namespace xNet
 
             if (statusCodeNum >= 500)
             {
-                throw new HttpException(string.Format(times,
-                    Resources.HttpException_SeverError, statusCodeNum),
+                throw new HttpException(string.Format(times + Resources.HttpException_SeverError, statusCodeNum),
                     HttpExceptionStatus.ProtocolError, _response.StatusCode);
             }
         }
