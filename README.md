@@ -1,5 +1,5 @@
 * PL: C#
-* Version .NET: 4.0 Client Profile
+* Version .NET: 4.8
 
 xNet - a class library for .NET Framework which includes:
 * Classes for work with proxy servers: _HTTP, Socks4(a), Socks5, Chain_.
