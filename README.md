@@ -6,6 +6,7 @@ xNet - a class library for .NET Framework which includes:
 * Classes for work with *HTTP 1.0/1.1* protocol: _keep-alive, gzip, deflate, chunked, SSL, proxies and more_.
 
 Подробное описание на русском: http://habrahabr.ru/post/146475/ <br />
+Detailed description in Russian: http://habrahabr.ru/post/146475/ <br />
 
 Example:
 <pre>
