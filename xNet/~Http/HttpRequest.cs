@@ -18,6 +18,9 @@ namespace xNet
     /// </summary>
     public class HttpRequest : IDisposable
     {
+        string times = DateTime.Now.ToString("[yyyy-MM-dd - HH:mm:ss.fff] ",
+            CultureInfo.CurrentCulture);
+
         // Используется для определения того, сколько байт было отправлено/считано.
         private sealed class HttpWraperStream : Stream
         {
@@ -2439,14 +2442,13 @@ namespace xNet
 
             if ((statusCodeNum >= 400) && (statusCodeNum < 500))
             {
-                throw new HttpException(string.Format(
-                    Resources.HttpException_ClientError, statusCodeNum),
+                throw new HttpException(string.Format(times + Resources.HttpException_ClientError, statusCodeNum),
                     HttpExceptionStatus.ProtocolError, _response.StatusCode);
             }
 
             if (statusCodeNum >= 500)
             {
-                throw new HttpException(string.Format(
+                throw new HttpException(string.Format(times,
                     Resources.HttpException_SeverError, statusCodeNum),
                     HttpExceptionStatus.ProtocolError, _response.StatusCode);
             }
