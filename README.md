@@ -8,7 +8,7 @@ xNet - a class library for .NET Framework which includes:
 Подробное описание на русском: http://habrahabr.ru/post/146475/ <br />
 Detailed description in Russian: http://habrahabr.ru/post/146475/ <br />
 
-** Progress
+**Progress**
 **TODO:** Translation to English (in progress)
 
 Example:
