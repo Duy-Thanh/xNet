@@ -14,7 +14,7 @@ namespace xNet
     {
         private sealed class Element
         {
-            #region Поля (открытые)
+            #region Fields (open)
 
             public string Name;
             public string FileName;
@@ -31,7 +31,7 @@ namespace xNet
         }
 
 
-        #region Константы (закрытые)
+        #region Constants (private)
 
         private const int FieldTemplateSize = 43;
         private const int FieldFileTemplateSize = 72;
@@ -41,7 +41,7 @@ namespace xNet
         #endregion
 
 
-        #region Статические поля (закрытые)
+        #region Static fields (private)
 
         [ThreadStatic] private static Random _rand;
         private static Random Rand
@@ -57,7 +57,7 @@ namespace xNet
         #endregion
 
 
-        #region Поля (закрытые)
+        #region Fields (closed)
 
         private string _boundary;
         private List<Element> _elements = new List<Element>();
@@ -65,24 +65,24 @@ namespace xNet
         #endregion
 
 
-        #region Конструкторы (открытые)
+        #region Constructors (public)
 
         /// <summary>
-        /// Инициализирует новый экземпляр класса <see cref="MultipartContent"/>.
+        /// Initializes a new instance of the <see cref="MultipartContent"/> class.
         /// </summary>
         public MultipartContent()
             : this("----------------" + GetRandomString(16)) { }
 
         /// <summary>
-        /// Инициализирует новый экземпляр класса <see cref="MultipartContent"/>.
+        /// Initializes a new instance of the <see cref="MultipartContent"/> class.
         /// </summary>
-        /// <param name="boundary">Граница для отделения составных частей содержимого.</param>
-        /// <exception cref="System.ArgumentNullException">Значение параметра <paramref name="boundary"/> равно <see langword="null"/>.</exception>
-        /// <exception cref="System.ArgumentException">Значение параметра <paramref name="boundary"/> является пустой строкой.</exception>
-        /// <exception cref="System.ArgumentOutOfRangeException">Значение параметра <paramref name="boundary"/> имеет длину более 70 символов.</exception>
+        /// <param name="boundary">Border for separating component parts of content.</param>
+        /// <exception cref="System.ArgumentNullException">The value of the <paramref name="boundary"/> parameter is <see langword="null"/>.</exception>
+        /// <exception cref="System.ArgumentException">The value of the <paramref name="boundary"/> parameter is an empty string.</exception>
+        /// <exception cref="System.ArgumentOutOfRangeException">The <paramref name="boundary"/> parameter value is longer than 70 characters.</exception>
         public MultipartContent(string boundary)
         {
-            #region Проверка параметров
+            #region Parameter Check
 
             if (boundary == null)
             {
@@ -109,23 +109,23 @@ namespace xNet
         #endregion
 
 
-        #region Методы (открытые)
+        #region Methods (public)
 
         /// <summary>
-        /// Добавляет новый элемент состовного содержимого тела запроса.
+        /// Adds a new compound content element to the request body.
         /// </summary>
-        /// <param name="content">Значение элемента.</param>
-        /// <param name="name">Имя элемента.</param>
-        /// <exception cref="System.ObjectDisposedException">Текущий экземпляр уже был удалён.</exception>
+        /// <param name="content">Element value.</param>
+        /// <param name="name">Element name.</param>
+        /// <exception cref="System.ObjectDisposedException">The current instance has already been disposed.</exception>
         /// <exception cref="System.ArgumentNullException">
-        /// Значение параметра <paramref name="content"/> равно <see langword="null"/>.
-        /// -или-
-        /// Значение параметра <paramref name="name"/> равно <see langword="null"/>.
+        /// The value of the <paramref name="content"/> parameter is <see langword="null"/>.
+        /// -or-
+        /// The value of the <paramref name="name"/> parameter is <see langword="null"/>.
         /// </exception>
-        /// <exception cref="System.ArgumentException">Значение параметра <paramref name="name"/> является пустой строкой.</exception>
+        /// <exception cref="System.ArgumentException">The value of the parameter <paramref name="name"/> is an empty string.</exception>
         public void Add(HttpContent content, string name)
         {
-            #region Проверка параметров
+            #region Parameter Check
 
             if (content == null)
             {
@@ -154,23 +154,23 @@ namespace xNet
         }
 
         /// <summary>
-        /// Добавляет новый элемент состовного содержимого тела запроса.
+        /// Adds a new compound content element to the request body.
         /// </summary>
-        /// <param name="content">Значение элемента.</param>
-        /// <param name="name">Имя элемента.</param>
-        /// <param name="fileName">Имя файла элемента.</param>
-        /// <exception cref="System.ObjectDisposedException">Текущий экземпляр уже был удалён.</exception>
+        /// <param name="content">Element value.</param>
+        /// <param name="name">Element name.</param>
+        /// <param name="fileName">Element file name.</param>
+        /// <exception cref="System.ObjectDisposedException">The current instance has already been disposed.</exception>
         /// <exception cref="System.ArgumentNullException">
-        /// Значение параметра <paramref name="content"/> равно <see langword="null"/>.
-        /// -или-
-        /// Значение параметра <paramref name="name"/> равно <see langword="null"/>.
-        /// -или-
-        /// Значение параметра <paramref name="fileName"/> равно <see langword="null"/>.
+        /// The value of the <paramref name="content"/> parameter is <see langword="null"/>.
+        /// -or-
+        /// The value of the <paramref name="name"/> parameter is <see langword="null"/>.
+        /// -or-
+        /// The value of the <paramref name="fileName"/> parameter is <see langword="null"/>.
         /// </exception>
-        /// <exception cref="System.ArgumentException">Значение параметра <paramref name="name"/> является пустой строкой.</exception>
+        /// <exception cref="System.ArgumentException">The value of the parameter <paramref name="name"/> is an empty string.</exception>
         public void Add(HttpContent content, string name, string fileName)
         {
-            #region Проверка параметров
+            #region Parameter Check
 
             if (content == null)
             {
@@ -208,26 +208,26 @@ namespace xNet
         }
 
         /// <summary>
-        /// Добавляет новый элемент состовного содержимого тела запроса.
+        /// Adds a new compound content element to the request body.
         /// </summary>
-        /// <param name="content">Значение элемента.</param>
-        /// <param name="name">Имя элемента.</param>
-        /// <param name="fileName">Имя файла элемента.</param>
-        /// <param name="contentType">MIME-тип контента.</param>
-        /// <exception cref="System.ObjectDisposedException">Текущий экземпляр уже был удалён.</exception>
+        /// <param name="content">Element value.</param>
+        /// <param name="name">Element name.</param>
+        /// <param name="fileName">Element file name.</param>
+        /// <param name="contentType">MIME content type.</param>
+        /// <exception cref="System.ObjectDisposedException">The current instance has already been disposed.</exception>
         /// <exception cref="System.ArgumentNullException">
-        /// Значение параметра <paramref name="content"/> равно <see langword="null"/>.
-        /// -или-
-        /// Значение параметра <paramref name="name"/> равно <see langword="null"/>.
-        /// -или-
-        /// Значение параметра <paramref name="fileName"/> равно <see langword="null"/>.
-        /// -или-
-        /// Значение параметра <paramref name="contentType"/> равно <see langword="null"/>.
+        /// The value of the <paramref name="content"/> parameter is <see langword="null"/>.
+        /// -or-
+        /// The value of the <paramref name="name"/> parameter is <see langword="null"/>.
+        /// -or-
+        /// The value of the <paramref name="fileName"/> parameter is <see langword="null"/>.
+        /// -or-
+        /// The value of the <paramref name="contentType"/> parameter is <see langword="null"/>.
         /// </exception>
-        /// <exception cref="System.ArgumentException">Значение параметра <paramref name="name"/> является пустой строкой.</exception>
+        /// <exception cref="System.ArgumentException">The value of the parameter <paramref name="name"/> is an empty string.</exception>
         public void Add(HttpContent content, string name, string fileName, string contentType)
         {
-            #region Проверка параметров
+            #region Parameter Check
 
             if (content == null)
             {
@@ -269,10 +269,10 @@ namespace xNet
         }
 
         /// <summary>
-        /// Подсчитывает и возвращает длину тела запроса в байтах.
+        /// Counts and returns the length of the request body in bytes.
         /// </summary>
-        /// <returns>Длина тела запроса в байтах.</returns>
-        /// <exception cref="System.ObjectDisposedException">Текущий экземпляр уже был удалён.</exception>
+        /// <returns>The length of the request body in bytes.</returns>
+        /// <exception cref="System.ObjectDisposedException">The current instance has already been disposed.</exception>
         public override long CalculateContentLength()
         {
             ThrowIfDisposed();
@@ -296,7 +296,7 @@ namespace xNet
                     length += element.Name.Length;
                 }
 
-                // 2 (--) + x (boundary) + 2 (\r\n) ...элемент данных... + 2 (\r\n).
+                // 2 (--) + x (boundary) + 2 (\r\n) ...item... + 2 (\r\n).
                 length += _boundary.Length + 6;
             }
 
@@ -316,7 +316,7 @@ namespace xNet
         {
             ThrowIfDisposed();
 
-            #region Проверка параметров
+            #region Parameter Check
 
             if (stream == null)
             {
@@ -357,10 +357,10 @@ namespace xNet
         }
 
         /// <summary>
-        /// Возвращает перечеслитель элементов составного содержимого.
+        /// Returns an enumerator of the compound content elements.
         /// </summary>
         /// <returns></returns>
-        /// <exception cref="System.ObjectDisposedException">Текущий экземпляр уже был удалён.</exception>
+        /// <exception cref="System.ObjectDisposedException">The current instance has already been disposed.</exception>
         public IEnumerator<HttpContent> GetEnumerator()
         {
             ThrowIfDisposed();
@@ -372,9 +372,10 @@ namespace xNet
 
 
         /// <summary>
-        /// Освобождает неуправляемые (а при необходимости и управляемые) ресурсы, используемые объектом <see cref="HttpContent"/>.
+        /// Releases the unmanaged (and optionally managed) resources used by the <see cref="HttpContent"/> object.
         /// </summary>
-        /// <param name="disposing">Значение <see langword="true"/> позволяет освободить управляемые и неуправляемые ресурсы; значение <see langword="false"/> позволяет освободить только неуправляемые ресурсы.</param>
+        /// <param name="disposing">The <see langword="true"/> value allows you to release managed and unmanaged resources; 
+        /// the <see langword="false"/> value only releases unmanaged resources.</param>
         protected override void Dispose(bool disposing)
         {
             if (disposing && _elements != null)
@@ -397,7 +398,7 @@ namespace xNet
         }
 
 
-        #region Методы (закрытые)
+        #region Methods (private)
 
         public static string GetRandomString(int length)
         {

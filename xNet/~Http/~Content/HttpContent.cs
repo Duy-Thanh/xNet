@@ -2,17 +2,17 @@
 
 namespace xNet
 {
-    /// <summary>
-    /// Представляет тело запроса. Освбождается сразу после отправки.
-    /// </summary>
+    /// <summary> 
+    /// Represents the request body. Released immediately after dispatch. 
+    /// </summary>    
     public abstract class HttpContent
     {
-        /// <summary>MIME-тип контента.</summary>
+        /// <summary>MIME content type.</summary>
         protected string _contentType = string.Empty;
 
 
         /// <summary>
-        /// Возвращает или задаёт MIME-тип контента.
+        /// Gets or sets the content MIME type.
         /// </summary>
         public string ContentType
         {
@@ -27,22 +27,22 @@ namespace xNet
         }
 
 
-        #region Методы (открытые)
+        #region Methods (public)
 
         /// <summary>
-        /// Подсчитывает и возвращает длину тела запроса в байтах.
+        /// Counts and returns the length of the request body in bytes.
         /// </summary>
-        /// <returns>Длина тела запроса в байтах.</returns>
+        /// <returns>The length of the request body in bytes.</returns>
         public abstract long CalculateContentLength();
 
         /// <summary>
-        /// Записывает данные тела запроса в поток.
+        /// Writes the request body data to the stream.
         /// </summary>
-        /// <param name="stream">Поток, куда будут записаны данные тела запроса.</param>
+        /// <param name="stream">The stream where the request body data will be written.</param>
         public abstract void WriteTo(Stream stream);
 
         /// <summary>
-        /// Освобождает все ресурсы, используемые текущим экземпляром класса <see cref="HttpContent"/>.
+        /// Releases all resources used by the current class instance <see cref="HttpContent"/>.
         /// </summary>
         public void Dispose()
         {
@@ -53,9 +53,10 @@ namespace xNet
 
 
         /// <summary>
-        /// Освобождает неуправляемые (а при необходимости и управляемые) ресурсы, используемые объектом <see cref="HttpContent"/>.
+        /// Releases the unmanaged (and optionally managed) resources used by the <see cref="HttpContent"/> object.
         /// </summary>
-        /// <param name="disposing">Значение <see langword="true"/> позволяет освободить управляемые и неуправляемые ресурсы; значение <see langword="false"/> позволяет освободить только неуправляемые ресурсы.</param>
+        /// <param name="disposing">The <see langword="true"/> value allows you to release managed and unmanaged resources; 
+        /// the <see langword="false"/> value only releases unmanaged resources.</param>
         protected virtual void Dispose(bool disposing) { }
     }
 }

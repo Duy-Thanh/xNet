@@ -4,52 +4,52 @@ using System.IO;
 namespace xNet
 {
     /// <summary>
-    /// Представляет тело запроса в виде байтов.
+    /// Represents the request body as bytes.
     /// </summary>
     public class BytesContent : HttpContent
     {
-        #region Поля (защищённые)
+        #region Fields (protected)
 
-        /// <summary>Содержимое тела запроса.</summary>
+        /// <summary>The content of the request body.</summary>
         protected byte[] _content;
-        /// <summary>Смещение в байтах содержимого тела запроса.</summary>
+        /// <summary>The byte offset of the content of the request body.</summary>
         protected int _offset;
-        /// <summary>Число отправляемых байтов содержимого.</summary>
+        /// <summary>The number of bytes of content to send.</summary>
         protected int _count;
 
         #endregion
 
 
-        #region Конструкторы (открытые)
+        #region Constructors (public)
 
         /// <summary>
-        /// Инициализирует новый экземпляр класса <see cref="BytesContent"/>.
+        /// Initializes a new instance of the class <see cref="BytesContent"/>.
         /// </summary>
-        /// <param name="content">Содержимое тела запроса.</param>
-        /// <exception cref="System.ArgumentNullException">Значение параметра <paramref name="content"/> равно <see langword="null"/>.</exception>
-        /// <remarks>По умолчанию используется тип контента - 'application/octet-stream'.</remarks>
+        /// <param name="content">The content of the request body.</param>
+        /// <exception cref="System.ArgumentNullException">The value of the <paramref name="content"/> parameter is <see langword="null"/>.</exception>
+        /// <remarks>The default content type is: 'application/octet-stream'.</remarks>
         public BytesContent(byte[] content)
             : this(content, 0, content.Length) { }
 
         /// <summary>
-        /// Инициализирует новый экземпляр класса <see cref="BytesContent"/>.
+        /// Initializes a new instance of the class <see cref="BytesContent"/>.
         /// </summary>
-        /// <param name="content">Содержимое тела запроса.</param>
-        /// <param name="offset">Смещение в байтах для контента.</param>
-        /// <param name="count">Число байтов отправляемых из контента.</param>
-        /// <exception cref="System.ArgumentNullException">Значение параметра <paramref name="content"/> равно <see langword="null"/>.</exception>
+        /// <param name="content">The content of the request body.</param>
+        /// <param name="offset">The byte offset for the content.</param>
+        /// <param name="count">The number of bytes sent from the content.</param>
+        /// <exception cref="System.ArgumentNullException">The value of the <paramref name="content"/> parameter is <see langword="null"/>.</exception>
         /// <exception cref="System.ArgumentOutOfRangeException">
-        /// Значение параметра <paramref name="offset"/> меньше 0.
-        /// -или-
-        /// Значение параметра <paramref name="offset"/> больше длины содержимого.
-        /// -или-
-        /// Значение параметра <paramref name="count"/> меньше 0.
-        /// -или-
-        /// Значение параметра <paramref name="count"/> больше (длина содержимого - смещение).</exception>
-        /// <remarks>По умолчанию используется тип контента - 'application/octet-stream'.</remarks>
+        /// <paramref name="offset"/> parameter value is less than 0.
+        /// -or-
+        /// The value of the <paramref name="offset"/> parameter is greater than the length of the content.
+        /// -or-
+        /// The value of the <paramref name="count"/> parameter is less than 0.
+        /// -or-
+        /// <paramref name="count"/> value is greater than (content length - offset).</exception>
+        /// <remarks>The default content type is 'application/octet-stream'.</remarks>
         public BytesContent(byte[] content, int offset, int count)
         {
-            #region Проверка параметров
+            #region Parameter Check
 
             if (content == null)
             {
@@ -89,26 +89,26 @@ namespace xNet
 
 
         /// <summary>
-        /// Инициализирует новый экземпляр класса <see cref="BytesContent"/>.
+        /// Initializes a new instance of the class <see cref="BytesContent"/>.
         /// </summary>
         protected BytesContent() { }
 
 
-        #region Методы (открытые)
+        #region Methods (public)
 
         /// <summary>
-        /// Подсчитывает и возвращает длину тела запроса в байтах.
+        /// Counts and returns the length of the request body in bytes.
         /// </summary>
-        /// <returns>Длина тела запроса в байтах.</returns>
+        /// <returns>The length of the request body in bytes.</returns>
         public override long CalculateContentLength()
         {
             return _content.LongLength;
         }
 
         /// <summary>
-        /// Записывает данные тела запроса в поток.
+        /// Writes the request body data to the stream.
         /// </summary>
-        /// <param name="stream">Поток, куда будут записаны данные тела запроса.</param>
+        /// <param name="stream">The stream where the request body data will be written.</param>
         public override void WriteTo(Stream stream)
         {
             stream.Write(_content, _offset, _count);

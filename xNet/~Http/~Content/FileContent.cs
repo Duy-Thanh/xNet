@@ -4,34 +4,35 @@ using System.IO;
 namespace xNet
 {
     /// <summary>
-    /// Представляет тело запроса в виде потока данных из определённого файла.
+    /// Represents the request body as a stream of data from a specific file.
     /// </summary>
     public class FileContent : StreamContent
     {
         /// <summary>
-        /// Инициализирует новый экземпляр класса <see cref="FileContent"/> и открывает поток файла.
+        /// Initializes a new instance of the <see cref="FileContent"/> class and opens a file stream.
         /// </summary>
-        /// <param name="pathToContent">Путь к файлу, который станет содержимым тела запроса.</param>
-        /// <param name="bufferSize">Размер буфера в байтах для потока.</param>
-        /// <exception cref="System.ArgumentNullException">Значение параметра <paramref name="pathToContent"/> равно <see langword="null"/>.</exception>
-        /// <exception cref="System.ArgumentException">Значение параметра <paramref name="pathToContent"/> является пустой строкой.</exception>
-        /// <exception cref="System.ArgumentOutOfRangeException"> Значение параметра <paramref name="bufferSize"/> меньше 1.</exception>
-        /// <exception cref="System.IO.PathTooLongException">Указанный путь, имя файла или и то и другое превышает наибольшую возможную длину, определенную системой. Например, для платформ на основе Windows длина пути не должна превышать 248 знаков, а имена файлов не должны содержать более 260 знаков.</exception>
-        /// <exception cref="System.IO.FileNotFoundException">Значение параметра <paramref name="pathToContent"/> указывает на несуществующий файл.</exception>
-        /// <exception cref="System.IO.DirectoryNotFoundException">Значение параметра <paramref name="pathToContent"/> указывает на недопустимый путь.</exception>
-        /// <exception cref="System.IO.IOException">Ошибка ввода-вывода при работе с файлом.</exception>
-        /// <exception cref="System.Security.SecurityException">Вызывающий оператор не имеет необходимого разрешения.</exception>
+        /// <param name="pathToContent">The path to the file that will become the content of the request body.</param>
+        /// <param name="bufferSize">The buffer size in bytes for the stream.</param>
+        /// <exception cref="System.ArgumentNullException">The value of the <paramref name="pathToContent"/> parameter is <see langword="null"/>.</exception>
+        /// <exception cref="System.ArgumentException">The value of the <paramref name="pathToContent"/> parameter is an empty string.</exception>
+        /// <exception cref="System.ArgumentOutOfRangeException"> <paramref name="bufferSize"/> is less than 1.</exception>
+        /// <exception cref="System.IO.PathTooLongException">The specified path, file name, or both exceeds the maximum length allowed by the system. 
+        /// For example, for Windows-based platforms, paths cannot exceed 248 characters, and file names cannot exceed 260 characters.</exception>
+        /// <exception cref="System.IO.FileNotFoundException">The value of the <paramref name="pathToContent"/> parameter points to a file that does not exist.</exception>
+        /// <exception cref="System.IO.DirectoryNotFoundException">The <paramref name="pathToContent"/> parameter value points to an invalid path.</exception>
+        /// <exception cref="System.IO.IOException">I/O error while working with file.</exception>
+        /// <exception cref="System.Security.SecurityException">The caller does not have the required permission.</exception>
         /// <exception cref="System.UnauthorizedAccessException">
-        /// Операция чтения файла не поддерживается на текущей платформе.
-        /// -или-
-        /// Значение параметра <paramref name="pathToContent"/> определяет каталог.
-        /// -или-
-        /// Вызывающий оператор не имеет необходимого разрешения.
+        /// The file read operation is not supported on the current platform.
+        /// -or-
+        /// The value of the <paramref name="pathToContent"/> parameter specifies a directory.
+        /// -or-
+        /// The caller does not have the required permission.
         /// </exception>
-        /// <remarks>Тип контента определяется автоматически на основе расширения файла.</remarks>
+        /// <remarks>The content type is determined automatically based on the file extension.</remarks>
         public FileContent(string pathToContent, int bufferSize = 32768)
         {
-            #region Проверка параметров
+            #region Parameter Check
 
             if (pathToContent == null)
             {

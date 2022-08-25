@@ -10,7 +10,7 @@ namespace xNet
     /// </summary>
     public static class Html
     {
-        #region Статические поля (закрытые)
+        #region Static Field (private)
 
         private static readonly Dictionary<string, string> _htmlMnemonics = new Dictionary<string, string>()
         {
@@ -24,14 +24,14 @@ namespace xNet
         #endregion
 
 
-        #region Статические методы (открытые)
+        #region Static methods (public)
 
         /// <summary>
-        /// Заменяет в строке HTML-сущности на представляющие их символы.
+        /// Replaces HTML entities in a string with the characters that represent them.
         /// </summary>
-        /// <param name="str">Строка, в которой будет произведена замена.</param>
-        /// <returns>Строка с заменёнными HTML-сущностями.</returns>
-        /// <remarks>Заменяются только следующие мнемоники: apos, quot, amp, lt и gt. И все виды кодов.</remarks>
+        /// <param name="str">The string to replace.</param>
+        /// <returns>A string with replaced HTML entities.</returns>
+        /// <remarks>Only the following mnemonics are replaced: apos, quot, amp, lt, and gt. And all kinds of codes.</remarks>
         public static string ReplaceEntities(this string str)
         {
             if (string.IsNullOrEmpty(str))
@@ -65,11 +65,11 @@ namespace xNet
         }
 
         /// <summary>
-        /// Заменяет в строке Unicode-сущности на представляющие их символы.
+        /// Replaces Unicode entities in a string with the characters that represent them.
         /// </summary>
-        /// <param name="str">Строка, в которой будет произведена замена.</param>
-        /// <returns>Строка с заменёнными Unicode-сущностями.</returns>
-        /// <remarks>Unicode-сущности имеют вид: \u2320 или \U044F</remarks>
+        /// <param name="str">The string to replace.</param>
+        /// <returns>A string with replaced Unicode entities.</returns>
+        /// <remarks>Unicode entities are of the form: \u2320 or \U044F</remarks>
         public static string ReplaceUnicode(this string str)
         {
             if (string.IsNullOrEmpty(str))
@@ -89,13 +89,16 @@ namespace xNet
             return result;
         }
 
-        #region Работа со строками
+        #region Working with strings
 
         /// <summary>
-        /// Извлекает подстроку из строки. Подстрока начинается с конца позиции подстроки <paramref name="left"/> и до конца строки. Поиск начинается с заданной позиции.
+        /// Extracts a substring from a string. 
+        /// The substring starts from the end of the substring position 
+        /// <paramref name="left"/> and continues to the end of the string. 
+        /// The search starts from the given position.
         /// </summary>
-        /// <param name="str">Строка, в которой будет поиск подстроки.</param>
-        /// <param name="left">Строка, которая находится слева от искомой подстроки.</param>
+        /// <param name="str">The string in which to search for a substring.</param>
+        /// <param name="left">The string to the left of the searched substring.</param>
         /// <param name="startIndex">Позиция, с которой начинается поиск подстроки. Отсчёт от 0.</param>
         /// <param name="comparsion">Одно из значений перечисления, определяющее правила поиска.</param>
         /// <returns>Найденая подстрока, иначе пустая строка.</returns>
